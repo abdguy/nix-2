@@ -1,0 +1,8 @@
+result/
+result
+.pre-commit-config.yaml
+.direnv/
+.idea/
+logs/
+*.raw
+*.img

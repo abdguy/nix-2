@@ -1,0 +1,12 @@
+diff '--color=auto' --show-c-function -ur libinput-1.19.1/src/evdev.c libinput-1.19.1-no-accel/src/evdev.c
+
++++ libinput-1.19.1-no-accel/src/evdev.c	2021-12-17 10:25:44.803464279 -0800
+@@ -1273,7 +1275,7 @@ evdev_accel_config_get_default_profile(s
+ 		return LIBINPUT_CONFIG_ACCEL_PROFILE_NONE;
+ 
+ 	/* No device has a flat profile as default */
+
++	return LIBINPUT_CONFIG_ACCEL_PROFILE_FLAT;
+ }
+ 
+ void

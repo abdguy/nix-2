@@ -1,0 +1,42 @@
+diff --git a/dlls/ntdll/unix/process.c b/dlls/ntdll/unix/process.c
+index 503ef93d966..1e5a517ba92 100644
+--- a/dlls/ntdll/unix/process.c
++++ b/dlls/ntdll/unix/process.c
+@@ -1257,8 +1257,8 @@ NTSTATUS WINAPI NtQueryInformationProcess( HANDLE handle, PROCESSINFOCLASS class
+         break;
+ 
+     case ProcessDebugPort:
+-        len = sizeof(DWORD_PTR);
+-        if (size == len)
++        len = sizeof(DWORD);
++        if (size >= len)
+         {
+             if (!info) ret = STATUS_ACCESS_VIOLATION;
+             else
+@@ -1274,12 +1274,12 @@ NTSTATUS WINAPI NtQueryInformationProcess( HANDLE handle, PROCESSINFOCLASS class
+                 SERVER_END_REQ;
+                 if (ret == STATUS_SUCCESS)
+                 {
+-                    *(DWORD_PTR *)info = ~0ul;
++                    *(DWORD *)info = ~0ul;
+                     NtClose( debug );
+                 }
+                 else if (ret == STATUS_PORT_NOT_SET)
+                 {
+-                    *(DWORD_PTR *)info = 0;
++                    *(DWORD *)info = 0;
+                     ret = STATUS_SUCCESS;
+                 }
+             }
+diff --git a/dlls/ntdll/unix/registry.c b/dlls/ntdll/unix/registry.c
+index 797e32a5bf1..f258e28e730 100644
+--- a/dlls/ntdll/unix/registry.c
++++ b/dlls/ntdll/unix/registry.c
+@@ -156,6 +162,7 @@ NTSTATUS WINAPI NtOpenKeyEx( HANDLE *key, ACCESS_MASK access, const OBJECT_ATTRI
+         *key = wine_server_ptr_handle( reply->hkey );
+     }
+     SERVER_END_REQ;
++    TRACE("<- ret %d\n", ret);
+     TRACE("<- %p\n", *key);
+     return ret;
+ }

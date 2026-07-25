@@ -1,0 +1,8 @@
+---
+builds:
+  exclude:
+    # builds are massive due to custom kernel
+    - nixosConfigurations.*
+    # pull in same large systems
+    - checks.*.deploy-schema
+    - checks.*.deploy-activate
