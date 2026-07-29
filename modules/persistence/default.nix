@@ -1,8 +1,8 @@
 # Based off setup from github:buckley310/nixos-config although has diverged now
 { config, lib, utils, ... }:
 let
-  cfg = config.hackson.persistence;
-  inherit (config.hackson.persistence) persistPath;
+  cfg = config.lun.persistence;
+  inherit (config.lun.persistence) persistPath;
   addCheckDesc = desc: elemType: check: lib.types.addCheck elemType check
     // { description = "${elemType.description} (with check: ${desc})"; };
   isNonEmpty = s: (builtins.match "[ \t\n]*" s) == null;
@@ -30,7 +30,7 @@ let
   '';
 in
 {
-  options.hackson.persistence = {
+  options.lun.persistence = {
     enable = lib.mkEnableOption "Enable persistence module for tmpfs on root";
 
     persistPath = lib.mkOption {
@@ -49,7 +49,7 @@ in
     };
 
     # Intended for use with
-    # nix eval --raw .#nixosConfigurations.(hostname).config.hackson.persistence.dirs_for_shell_script
+    # nix eval --raw .#nixosConfigurations.(hostname).config.lun.persistence.dirs_for_shell_script
     # to iterate over dirs that need created in /persist
     dirs_for_shell_script = lib.mkOption {
       type = with lib.types; str;
@@ -69,12 +69,12 @@ in
       }
     ];
 
-    hackson.persistence.dirs_for_shell_script = builtins.concatStringsSep "\n" cfg.dirs;
+    lun.persistence.dirs_for_shell_script = builtins.concatStringsSep "\n" cfg.dirs;
 
     # Don't bother with the lecture or the need to keep state about who's been lectured
     security.sudo.extraConfig = "Defaults lecture=\"never\"";
 
-    hackson.persistence.dirs = [
+    lun.persistence.dirs = [
       "/var/log"
       "/var/tmp"
       "/root" # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962987 >:(
@@ -82,7 +82,7 @@ in
       "/etc/NetworkManager"
     ];
 
-    hackson.persistence.files = [
+    lun.persistence.files = [
       "/etc/adjtime"
     ];
 

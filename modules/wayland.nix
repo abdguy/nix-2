@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 {
-  config = lib.mkIf config.hackson.profiles.graphical {
+  config = lib.mkIf config.lun.profiles.graphical {
     security.pam.services.hyprlock = { };
     programs.hyprland = {
       enable = true;
@@ -10,7 +10,7 @@
       systemd.setPath.enable = true;
     };
     environment.systemPackages = [
-      pkgs.hyprpanel
+      pkgs.wayle
       pkgs.hyprcursor
     ];
     # Sometimes useful to force ATK support but don't run this always
@@ -23,14 +23,7 @@
     };
     programs.uwsm.waylandCompositors.hyprland.binPath = lib.mkForce "/run/wrappers/bin/Hyprland";
     programs.uwsm.waylandCompositors.hyprland.prettyName = "Hyprland";
-    security.wrappers."Hyprland" = {
-      setuid = false;
-      permissions = "u+rx,g+rx,o+rx";
-      owner = "root";
-      group = "root";
-      # cap_sys_nice needed for asynchronous reprojection
-      capabilities = "cap_sys_nice+eip";
-      source = lib.getExe' config.programs.hyprland.package "hyprland";
-    };
+
   };
 }
+

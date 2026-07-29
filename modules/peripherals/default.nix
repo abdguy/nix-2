@@ -2,7 +2,7 @@
 {
   config = lib.mkMerge [
     {
-      # FIXME: causes spurious GPU resumes https://hacksonnova.dev/articles/linux-gpu-runpm-spurious-resumes/
+      # FIXME: causes spurious GPU resumes https://lunnova.dev/articles/linux-gpu-runpm-spurious-resumes/
       # would prefer to enable
       services.fwupd.enable = true;
       hardware.wirelessRegulatoryDatabase = true;
@@ -15,7 +15,7 @@
       '';
     }
 
-    (lib.mkIf config.hackson.profiles.graphical {
+    (lib.mkIf config.lun.profiles.graphical {
       services.libinput = {
         # Enable touchpad/mouse
         enable = true;
@@ -42,7 +42,6 @@
       ];
       environment.systemPackages = [
         pkgs.openssl
-        pkgs.jmtpfs
         pkgs.libmtp
         pkgs.kdePackages.kio-extras
         pkgs.kdePackages.kio-admin
@@ -50,6 +49,9 @@
         pkgs.framesh
         pkgs.vial
       ];
+
+      #hardware intel
+      hardware.cpu.intel.updateMicrocode = true;
 
       programs.noisetorch.enable = true;
       networking.firewall.allowedTCPPorts = [ 24800 ];

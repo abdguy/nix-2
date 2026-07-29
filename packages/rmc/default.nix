@@ -33,7 +33,7 @@ buildPythonApplication rec {
     homepage = "https://pypi.org/project/rmc/";
     license = lib.licenses.mit;
     maintainers = [
-      lib.maintainers.hacksonNova
+      lib.maintainers.lunNova
     ];
     changelog = "https://github.com/ricklupton/rmc/releases"; # Placeholder - verify actual repo
     platforms = lib.platforms.unix; # It's a Python script, so it should run on most Unix-like systems.

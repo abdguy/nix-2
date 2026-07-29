@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
-let cfg = config.hackson.unifi; in
+let cfg = config.lun.unifi; in
 {
-  options.hackson.unifi.enable = lib.mkEnableOption "Enable unifi controller";
+  options.lun.unifi.enable = lib.mkEnableOption "Enable unifi controller";
 
   config = {
     services.unifi = lib.mkIf cfg.enable {

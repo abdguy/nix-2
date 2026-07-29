@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 {
-  options.hackson.profiles.graphical = (lib.mkEnableOption "Enable graphical profile") // { default = true; };
-  config = lib.mkIf config.hackson.profiles.graphical {
+  options.lun.profiles.graphical = (lib.mkEnableOption "Enable graphical profile") // { default = true; };
+  config = lib.mkIf config.lun.profiles.graphical {
     # DESKTOP ENV
     # Enable the X11 windowing system.
     services.xserver.enable = true;
     services.displayManager.sddm.enable = true;
     programs.ssh.askPassword = "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
-     services.displayManager.sddm.wayland.enable = lib.mkDefault true;
+    services.displayManager.sddm.wayland.enable = lib.mkDefault true;
     # services.displayManager.gdm.enable = true;
     # services.displayManager.gdm.wayland = true;
     # services.displayManager.gdm.nvidiaWayland = true;
@@ -24,9 +24,9 @@
     services.desktopManager.plasma6.enable = true;
     #services.xserver.windowManager.i3.enable = true;
     #services.xserver.windowManager.i3.extraSessionCommands = ''
-     # systemctl --user import-environment PATH
+    # systemctl --user import-environment PATH
     #'';
-    services.displayManager.defaultSession = "plasma6";
+    services.displayManager.defaultSession = "plasma";
 
     # oom kill faster for more responsiveness
     services.earlyoom.enable = true;
@@ -34,12 +34,12 @@
     services.earlyoom.freeSwapThreshold = 10;
 
     # PRINT
-    hackson.print.enable = true;
+    lun.print.enable = false;
 
     # XDG
     xdg.portal = {
-  enable = true;
-  xdgOpenUsePortal = true;
+      enable = true;
+      xdgOpenUsePortal = true;
     };
 
     # GRAPHICS ACCEL
@@ -62,11 +62,11 @@
     hardware.bluetooth.enable = true;
 
     # BLUETOOTH
-    hackson.persistence.dirs = [ "/var/lib/bluetooth" ];
+    lun.persistence.dirs = [ "/var/lib/bluetooth" ];
     services.blueman.enable = true;
     programs.dconf.enable = true;
     services.speechd.enable = true;
 
-    sconfig.yubikey = false; # modules/yubikey # FIXME pam error
+    #sconfig.yubikey = false; # modules/yubikey # FIXME pam error
   };
 }

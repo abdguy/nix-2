@@ -1,13 +1,7 @@
 { lib, config, ... }:
-
-let
-  cfg = config.hackson.profiles.androidDev;
-in
 {
-  options.hackson.profiles.androidDev = lib.mkEnableOption "Enable Android development tools";
-
-  config = lib.mkIf cfg {
+  config = lib.mkIf config.lun.profiles.androidDev {
     programs.adb.enable = true;
-    users.users.hackson.extraGroups = [ "adbusers" ];
+    users.users.lun.extraGroups = [ "adbusers" ];
   };
 }

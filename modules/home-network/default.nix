@@ -1,9 +1,9 @@
-{...}:{
+{ ... }: {
 
 
-   imports = [
+  imports = [
     ./unifi.nix
-   ];
+  ];
 
 
 }

@@ -52,7 +52,7 @@ let
           lib.nameValuePair
             (lib.removeSuffix ".nix" key)
             (args: import (path + "/${key}") (args // {
-              pkgs = args.pkgs // { hackson = args.pkgs.hackson or (self.localPackagesForPkgs args.pkgs); };
+              pkgs = args.pkgs // { lun = args.pkgs.lun or (self.localPackagesForPkgs args.pkgs); };
             })))
         (builtins.readDir path);
       flatten = recurse flattenOpSingle { } [ ];

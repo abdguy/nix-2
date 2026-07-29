@@ -27,34 +27,33 @@ in
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./x13s.nix
+
     ];
 
-  hackson.power-saving.enable = true;
-  hackson.power-saving.usb = true;
-  hackson.persistence.enable = true;
-  hackson.persistence.dirs = [
-    "/nix"
+  lun.power-saving.enable = true;
+  lun.power-saving.usb = true;
+  lun.persistence.enable = true;
+  lun.persistence.dirs = [
     "/tmp"
     "/var/lib/sddm"
   ];
-  hackson.conservative-governor.enable = true;
-  services.displayManager.defaultSession = "none+i3";
-  hackson.virtualisation.enable = lib.mkForce false;
+  lun.conservative-governor.enable = true;
+  services.displayManager.defaultSession = "plasma";
+  lun.virtualisation.enable = lib.mkForce false;
 
   services.udisks2.enable = true; # required for automounting with udiskie
-  boot.plymouth.enable = lib.mkForce false;
+  boot.plymouth.enable = true;
 
-  networking.hostName = "hackson-amayadori-nixos";
+  networking.hostName = "lun-amayadori-nixos";
   sconfig.machineId = "1f3c8ec5230e763537ec8ef5836f334a";
-  system.stateVersion = "23.05";
+  system.stateVersion = "26.05";
 
-  systemd.sleep.extraConfig = ''
-    AllowHibernation=no
-    AllowSuspend=yes
-    AllowSuspendThenHibernate=no
-    AllowHybridSleep=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowHibernation = "no";
+    AllowSuspend = "yes";
+    AllowSuspendThenHibernate = "no";
+    AllowHybridSleep = "no";
+  };
 
   environment.variables = waylandEnv;
   environment.sessionVariables = waylandEnv;

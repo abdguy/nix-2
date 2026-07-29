@@ -12,7 +12,7 @@
     #nixpkgs=input nixpkgs
     nix.registry.nixpkgs.flake = pkgs;
 
-    #nix.registry.nixos-config.flake = hackson;
+    #nix.registry.nixos-config.flake = lun;
     #pkgs = pkgs provided to this system
     # nix.registry.pkgs.flake = flakeArgs.nixpkgs;
     # FIXME: Figure out better way to get a `pkgs` that is this flake's overlayed pkgs available as `pkgs` flake

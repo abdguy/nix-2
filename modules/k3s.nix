@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.hackson.k3s;
+  cfg = config.lun.k3s;
 in
 {
-  options.hackson.k3s = {
+  options.lun.k3s = {
     enable = lib.mkEnableOption "k3s cluster node";
 
     role = lib.mkOption {
@@ -34,7 +34,7 @@ in
 
     boot.kernelModules = [ "fuse" ];
 
-    hackson.persistence.dirs = [
+    lun.persistence.dirs = [
       "/var/lib/rancher/k3s"
       "/etc/rancher"
     ];

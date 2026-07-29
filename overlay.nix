@@ -5,7 +5,7 @@ let
   localPackages = self.localPackagesForPkgs final;
 in
 {
-  hackson = localPackages;
+  lun = localPackages;
   powercord-plugins = self.lib.filterPrefix "pcp-" flakeArgs;
   powercord-themes = self.lib.filterPrefix "pct-" flakeArgs;
   nix-gaming = flakeArgs.nix-gaming.packages.${final.stdenv.hostPlatform.system};

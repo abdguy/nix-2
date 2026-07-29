@@ -17,6 +17,6 @@ _:
     };
     services.timesyncd.enable = false;
     services.ntp.enable = false;
-    hackson.persistence.dirs = [ "/var/lib/chrony" ];
+    lun.persistence.dirs = [ "/var/lib/chrony" ];
   };
 }

@@ -1,17 +1,17 @@
 { config, lib, ... }:
 
 let
-  cfg = config.hackson.ml;
+  cfg = config.lun.ml;
 
   virtualisation =
     config.virtualisation.podman.enable
-    or config.virtualisation.docker.enable;
+      or config.virtualisation.docker.enable;
 
   intel = builtins.elem "intel" cfg.gpus;
 
 in
 {
-  options.hackson.ml = {
+  options.lun.ml = {
     enable = lib.mkEnableOption "Enable ml";
 
     gpus = with lib; mkOption {

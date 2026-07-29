@@ -25,25 +25,25 @@ in
 
 
   config = lib.mkMerge [
-    (lib.mkIf (builtins.elem "hackson" cfg.enabled-users) {
+    (lib.mkIf (builtins.elem "lun" cfg.enabled-users) {
       home-manager.users = {
-        hackson = ./hackson;
+        lun = ./lun;
       };
 
-      services.impermanent-user-passwords = lib.mkIf config.hackson.persistence.enable {
+      services.impermanent-user-passwords = lib.mkIf config.lun.persistence.enable {
         enable = true;
-        username = "hackson";
-        persistLocation = "${config.hackson.persistence.persistPath}/secrets/hackson-hashFile";
-        initialPassword = "nix-placeholder";
+        username = "lun";
+        persistLocation = "${config.lun.persistence.persistPath}/secrets/lun-hashFile";
+        initialPassword = "hack-son-nix";
       };
 
-      users.users.hackson = {
+      users.users.lun = {
         isNormalUser = true;
         shell = pkgs.fish;
         # TODO: are these sensible
         extraGroups = adminGroups;
-      } // lib.optionalAttrs (!config.hackson.persistence.enable) {
-        initialPassword = "nix-placeholder";
+      } // lib.optionalAttrs (!config.lun.persistence.enable) {
+        hashedPassword = "$6$jggJHhOd2onE5Zc.$fjbOIgcXWhcyyC3HmHOEh1Q./g8ZrxtXpMmsQo4dfo9VYTisBRv4GBmNXqzpBC8hyrJE7w0EXrmttuaMX8eBf1";
       };
     })
     (lib.mkIf (builtins.elem "mmk" cfg.enabled-users) {

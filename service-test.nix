@@ -1,6 +1,6 @@
 _:
 # everything for unprivileged service testing is here except a bit of deploy boilerplate/getting inputs to the right place
-# which is under testSingleServiceDeployAshacksonOnLocalhost in flake.nix
+# which is under testSingleServiceDeployAslunOnLocalhost in flake.nix
 let
   self = {
     # nixos module for host system which enables systemd lingering
@@ -69,11 +69,11 @@ let
             _module.args.pkgs_i686 = lib.mkForce { };
             home.homeDirectory = "/home/${user}";
             home.username = "${user}";
-            home.stateVersion = "23.05";
+            home.stateVersion = "26.05";
           };
         };
         units = self.unitsFromHomeEnvironment {
-          inherit pkgs marker profileName homeEnvironment;
+          inherit marker profileName homeEnvironment;
         };
         activationScript = self.activationScriptForUnits { inherit pkgs marker profileName units postActivate; };
       in

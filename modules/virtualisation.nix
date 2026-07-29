@@ -1,12 +1,12 @@
 { pkgs, config, lib, ... }:
 {
-  options.hackson.virtualisation.enable = lib.mkEnableOption "virt" // { default = true; };
+  options.lun.virtualisation.enable = lib.mkEnableOption "virt" // { default = true; };
   config = lib.mkMerge [
     {
       # Not using NixOS containers currently
       boot.enableContainers = false;
     }
-    (lib.mkIf config.hackson.virtualisation.enable {
+    (lib.mkIf config.lun.virtualisation.enable {
 
       virtualisation = {
         # FIXME: rootless podman keeps fucking up so disabling it for now
@@ -18,7 +18,7 @@
         oci-containers.backend = "docker";
       };
 
-      hackson.persistence.dirs = [
+      lun.persistence.dirs = [
         "/var/lib/docker"
         "/var/lib/containers"
         "/var/lib/libvirt"

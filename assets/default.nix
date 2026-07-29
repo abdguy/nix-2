@@ -1,7 +1,7 @@
 {
-    images = {
-        hack_small = ./images/Gemini_Generated_Image_98yaaz98yaaz98ya.jpg;
-        hack_med = ./images/Gemini_Generated_Image_98yaaz98yaaz98ya(1).jpg;
-        hack_large = ./images/Gemini_Generated_Image_98yaaz98yaaz98ya(2).jpg;
-    };
+  images = {
+    hack_small = ./images/hack_small.png;
+    hack_med = ./images/hack_med.png;
+    hack_large = ./images/hack_large.png;
+  };
 }

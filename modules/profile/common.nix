@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 {
-  options.hackson.profiles.common = (lib.mkEnableOption "Enable common profile") // { default = true; };
+  options.lun.profiles.common = (lib.mkEnableOption "Enable common profile") // { default = true; };
 
-  config = lib.mkIf config.hackson.profiles.common {
-    my.home-manager.enabled-users = [ "hackson" ];
+  config = lib.mkIf config.lun.profiles.common {
+    my.home-manager.enabled-users = [ "lun" ];
 
     # LANGUAGE / I18N
     i18n = let locale = "en_US.UTF-8"; in
@@ -100,7 +100,7 @@
         KbdInteractiveAuthentication = false;
       };
     };
-    hackson.persistence.dirs = [ "/etc/ssh" ];
+    lun.persistence.dirs = [ "/etc/ssh" ];
 
     # BOOT
     boot = {
@@ -200,14 +200,14 @@
       traceroute
       dnsutils
       libfaketime
-      hackson.hackson
+      lun.lun
     ];
 
     # systemd
     systemd.settings.Manager.DefaultTimeoutStopSec = "45s";
-    systemd.user.extraConfig = ''
-      DefaultTimeoutStopSec=45s
-    '';
+    systemd.user.settings.Manager = {
+      DefaultTimeoutStopSec = "45s";
+    };
 
     # CHECKS
     assertions = [

@@ -15,7 +15,7 @@ let
       # })
       flakeArgs.self.overlays.default
       (import ./overlay-nixpkgs.nix { inherit flakeArgs; })
-      flakeArgs.hackson-pkgs.overlays.default
+      flakeArgs.lun-pkgs.overlays.default
     ] ++ lib.optionals (system == "aarch64-linux") [
       (import "${flakeArgs.x1e-nixos-config}/packages/overlay.nix")
     ];
@@ -66,7 +66,7 @@ let
             config = {
               home-manager.extraSpecialArgs = {
                 inherit flakeArgs;
-                hackson-profiles = config.hackson.profiles;
+                lun-profiles = config.lun.profiles;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -105,7 +105,7 @@ let
             extraSpecialArgs = {
               inherit flakeArgs;
               nixosConfig = null;
-              hackson-profiles = {
+              lun-profiles = {
                 graphical = true;
                 personal = true;
                 wine = false;
@@ -121,24 +121,24 @@ let
           };
       in
       {
-        hackson = makeUser "hackson";
+        lun = makeUser "lun";
         mmk = makeUser "mmk";
       };
     slowChecks = rec {
       all-packages = perSystemSelf.pkgs.symlinkJoin {
-        name = "hackson packages.${system}";
+        name = "lun packages.${system}";
         paths = lib.attrValues perSystemSelf.packages;
       };
       all-systems = perSystemSelf.pkgs.symlinkJoin {
-        name = "hackson nixosConfigurations for system ${system}";
+        name = "lun nixosConfigurations for system ${system}";
         paths = lib.filter (x: x.system == system) (map (cfg: flakeArgs.self.nixosConfigurations.${cfg}.config.system.build.toplevel) (builtins.attrNames flakeArgs.self.nixosConfigurations));
       };
       all-users = perSystemSelf.pkgs.symlinkJoin {
-        name = "hackson homeConfigurations for system ${system}";
+        name = "lun homeConfigurations for system ${system}";
         paths = map (x: x.activationPackage) (lib.attrValues perSystemSelf.homeConfigurations);
       };
       all = perSystemSelf.pkgs.symlinkJoin {
-        name = "hackson all";
+        name = "lun all";
         paths = [ all-packages all-systems all-users ];
       };
     };
@@ -165,7 +165,7 @@ let
           };
         };
       };
-    } // flakeArgs.deploy-rs.lib.${system}.deployChecks flakeArgs.self.deploy;
+    };
   };
 in
 perSystemSelf

@@ -1,5 +1,5 @@
 {
-  description = "hackson's system config";
+  description = "lun's system config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -22,7 +22,7 @@
     thoth-reminder-bot.inputs.flake-utils.follows = "flake-utils";
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
-    openxr-nix-flake.url = "github:hacksonNova/openxr-nix-flake";
+    openxr-nix-flake.url = "github:LunNova/openxr-nix-flake";
     openxr-nix-flake.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -63,8 +63,8 @@
     #};
     oisd = { url = "github:sjhgvr/oisd"; flake = false; };
 
-    hackson-pkgs.url = "github:hacksonNova/hackson-pkgs.nix";
-    minimal-shell.url = "github:hacksonNova/nix-minimal-shell";
+    lun-pkgs.url = "github:LunNova/lun-pkgs.nix";
+    minimal-shell.url = "github:LunNova/nix-minimal-shell";
     lanzaboote.url = "github:nix-community/lanzaboote";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     x1e-nixos-config.url = "github:kuruczgy/x1e-nixos-config";
@@ -96,7 +96,7 @@
       perSystem = import ./per-system.nix { inherit flakeArgs; };
       allSystemsUnmerged = flakeArgs.flake-utils.lib.eachDefaultSystem perSystem;
       allSystems = allSystemsUnmerged // { homeConfigurations = lib.flatten allSystemsUnmerged.homeConfigurations; };
-      serviceTest = import ./service-test.nix { };
+
       inherit (flakeArgs) self;
     in
     {
@@ -107,58 +107,18 @@
       nixosModules = self.lib.readExportedModules ./modules/exported;
 
       nixosConfigurations = {
-        router-nixos = allSystems.makeHost.x86_64-linux ./hosts/router;
-        tsukiakari-nixos = allSystems.makeHost.x86_64-linux ./hosts/tsukiakari;
-        tsukikage-nixos = allSystems.makeHost.x86_64-linux ./hosts/tsukikage;
-        hoshitsuki-nixos = allSystems.makeHost.x86_64-linux ./hosts/hoshitsuki;
-        hackson-kosame-nixos = allSystems.makeHost.x86_64-linux ./hosts/kosame;
-        hackson-hisame-nixos = allSystems.makeHost.x86_64-linux ./hosts/hisame;
-        hackson-shigure = allSystems.makeHost.x86_64-linux ./hosts/shigure;
-        hackson-aoame = allSystems.makeHost.aarch64-linux ./hosts/aoame;
-        hackson-amayadori-nixos = allSystems.makeHost.aarch64-linux ./hosts/amayadori;
-        builder-nixos = allSystems.makeHost.x86_64-linux ./hosts/builder;
-        kirisame-nixos = allSystems.makeHost.x86_64-linux ./hosts/kirisame;
+        #router-nixos = allSystems.makeHost.x86_64-linux ./hosts/router;
+        #tsukiakari-nixos = allSystems.makeHost.x86_64-linux ./hosts/tsukiakari;
+        #tsukikage-nixos = allSystems.makeHost.x86_64-linux ./hosts/tsukikage;
+        # hoshitsuki-nixos = allSystems.makeHost.x86_64-linux ./hosts/hoshitsuki;
+        #lun-kosame-nixos = allSystems.makeHost.x86_64-linux ./hosts/kosame;
+        #lun-hisame-nixos = allSystems.makeHost.x86_64-linux ./hosts/hisame;
+        #lun-shigure = allSystems.makeHost.x86_64-linux ./hosts/shigure;
+        #lun-aoame = allSystems.makeHost.aarch64-linux ./hosts/aoame;
+        lun-amayadori-nixos = allSystems.makeHost.x86_64-linux ./hosts/amayadori;
+        #builder-nixos = allSystems.makeHost.x86_64-linux ./hosts/builder;
+        #kirisame-nixos = allSystems.makeHost.x86_64-linux ./hosts/kirisame;
       };
 
-      deploy =
-        let
-          useRemoteBuilds = false;
-          mkNode = { name, hostname ? "${name}-nixos", fast ? false, cfg ? self.nixosConfigurations.${name + "-nixos"} }: {
-            inherit hostname;
-            # interactiveSudo = true;
-            profiles.system = {
-              sshUser = "deployer";
-              user = "root";
-              path = flakeArgs.deploy-rs.lib.x86_64-linux.activate.nixos cfg;
-            };
-            remoteBuild = fast && useRemoteBuilds;
-          };
-        in
-        {
-          nodes.router = mkNode { name = "router"; hostname = "10.5.5.1"; };
-          nodes.tsukiakari = mkNode { name = "tsukiakari"; fast = true; };
-          nodes.tsukikage = mkNode { name = "tsukikage"; fast = true; };
-          nodes.shigure = mkNode { name = "shigure"; hostname = "hackson-shigure"; cfg = self.nixosConfigurations.hackson-shigure; fast = true; };
-          nodes.hoshitsuki = mkNode { name = "hoshitsuki"; fast = true; };
-          nodes.kirisame = mkNode { name = "kirisame"; fast = true; };
-          nodes.testSingleServiceDeployAshacksonOnLocalhost = {
-            hostname = "localhost";
-            profiles.serviceTest = serviceTest.hmProfile {
-              inherit (flakeArgs) deploy-rs;
-              inherit (flakeArgs.nixpkgs) lib;
-              inherit (flakeArgs.self.homeConfigurations."x86_64-linux/hackson") pkgs;
-              user = "hackson";
-              profileName = "hacksonHello";
-              modules = [
-                serviceTest.helloWorldModule
-              ];
-              hm = import "${flakeArgs.home-manager}/modules";
-              postActivate = ''
-                systemctl --user reload-or-restart hello
-                systemctl --user status hello --lines=1 || true
-              '';
-            };
-          };
-        };
     } // allSystems;
 }

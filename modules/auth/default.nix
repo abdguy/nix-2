@@ -7,21 +7,21 @@ let
     };
 in
 {
-  users.users."hackson".openssh.authorizedKeys.keyFiles = [
+  users.users."lun".openssh.authorizedKeys.keyFiles = [
     ./keys.pub
   ];
-   users.users."deployer".openssh.authorizedKeys.keyFiles = [
+  users.users."deployer".openssh.authorizedKeys.keyFiles = [
     ./keys.pub
   ];
 
-  users.users.hackson = {
+  users.users.lun = {
     uid = 1000;
   };
   users.users.deployer = {
     uid = 1002;
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel"  ];
+    extraGroups = [ "wheel" ];
   };
   security.sudo.extraRules = [
     {

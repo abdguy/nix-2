@@ -1,13 +1,7 @@
 { lib, config, ... }:
-
-let
-  cfg = config.hackson.profiles.androidDev;
-in
 {
-  options.hackson.profiles.androidDev.enable = lib.mkEnableOption "jhh";
-
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.lun.profiles.androidDev {
     programs.adb.enable = true;
-    users.users.hackson.extraGroups = [ "adbusers" ];
+    users.users.lun.extraGroups = [ "adbusers" ];
   };
 }

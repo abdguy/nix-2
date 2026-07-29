@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   name = "outofdateinator";
-  cfg = config.hackson.${name};
+  cfg = config.lun.${name};
   # test with systemctl --user start outofdateinator-force
   # ALL PTSes MUST KNOW
   beep = pkgs.resholve.writeScriptBin "${name}-beep"
@@ -29,7 +29,7 @@ let
   '';
 in
 {
-  options.hackson.${name}.enable = lib.mkEnableOption name;
+  options.lun.${name}.enable = lib.mkEnableOption name;
   config = lib.mkIf cfg.enable {
     systemd.user.services.${name} = {
       path = lib.mkForce [ ];

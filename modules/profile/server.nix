@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
-  options.hackson.profiles.server = lib.mkEnableOption "Enable server profile";
-  config = lib.mkIf config.hackson.profiles.server {
+  options.lun.profiles.server = lib.mkEnableOption "Enable server profile";
+  config = lib.mkIf config.lun.profiles.server {
     hardware.graphics.enable = lib.mkForce false;
     services.pulseaudio.enable = lib.mkForce false;
     services.pipewire.enable = lib.mkForce false;
