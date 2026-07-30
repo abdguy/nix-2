@@ -66,6 +66,7 @@ let
     # inherit (flakeArgs.nixpkgs-mesa-pr.legacyPackages.${pkgs.system}) mesa;
     mesa = mesaOverride pkgs.mesa;
     wally = pkgs.callPackage ./wally { };
+    plymouth = pkgs.callPackage ./plymouth { };
   } //
   # These packages are x86_64-linux
   # This is mostly due to depending on pkgs.pkgsi686Linux to evaluate

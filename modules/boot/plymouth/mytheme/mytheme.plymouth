@@ -1,8 +1,0 @@
-[Plymouth Theme]
-Name=My NixOS Theme
-Description=My custom boot animation
-ModuleName=script
-
-[script]
-ImageDir=/new/assets/images
-ScriptFile=/new/modules/plymouth/mytheme/mytheme.script
