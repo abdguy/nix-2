@@ -1,4 +1,4 @@
-{ pkgs, config, lib, lun-profiles, ... }:
+{ pkgs, config, lib, lun-desktop_interface, ... }:
 let
   runtime = "${pkgs.opencomposite}/lib/opencomposite";
   # runtime = "${pkgs.xrizer}/lib/xrizer";
@@ -6,7 +6,7 @@ in
 {
   # osu-lazer # not currently playing
   # prismlauncher # not currently playing
-  home.packages = lib.optionals (lun-profiles.wineGaming or false) [
+  home.packages = lib.optionals (lun-desktop_interface.wineGaming or false) [
     pkgs.lun-pkgs.wine
     # TODO: try bottles instead of lutris
   ];

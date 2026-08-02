@@ -3,11 +3,9 @@
   imports = [
     ./common.nix
     ./graphical.nix
-    ./gaming.nix
-    ./server.nix
   ];
 
-  options.lun.profiles = {
+  options.lun.desktop_interface = {
     androidDev = lib.mkEnableOption "enable android development";
     personal = lib.mkEnableOption "personal system (not shared)";
   };

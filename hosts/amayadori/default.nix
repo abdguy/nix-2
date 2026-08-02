@@ -38,7 +38,7 @@ in
     "/var/lib/sddm"
   ];
   lun.conservative-governor.enable = true;
-  services.displayManager.defaultSession = "plasma";
+  services.displayManager.defaultSession = "hyprland";
   lun.virtualisation.enable = lib.mkForce false;
 
   services.udisks2.enable = true; # required for automounting with udiskie

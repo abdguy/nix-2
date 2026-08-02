@@ -1,4 +1,4 @@
-{ pkgs, config, lib, flakeArgs, lun-profiles, ... }:
+{ pkgs, config, lib, flakeArgs, lun-desktop_interface, ... }:
 let
   sshAddDefault = pkgs.writeShellApplication {
     name = "sshAddDefault";
@@ -23,7 +23,7 @@ in
       mesa-demos
       vulkan-tools
       nurl # nix-prefetch-url but better
-    ] ++ lib.optionals lun-profiles.personal [
+    ] ++ lib.optionals lun-desktop_interface.personal [
       flakeArgs.deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # LSPs

@@ -1,4 +1,4 @@
-{ pkgs, lib, flakeArgs, lun-profiles, ... }:
+{ pkgs, lib, flakeArgs, lun-desktop_interface, ... }:
 let
   llm-agents = flakeArgs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 
@@ -114,7 +114,7 @@ let
   };
 in
 {
-  config = lib.mkIf (lun-profiles.personal or false) {
+  config = lib.mkIf (lun-desktop_interface.personal or false) {
     home.packages = [
       pkgs.code-cursor
       llm-agents.codex

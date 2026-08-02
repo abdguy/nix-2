@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, lib }:
+{ stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation {
   pname = "plymouth-theme";
@@ -14,7 +14,14 @@ stdenv.mkDerivation {
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p $out/share/plymouth/themes/hud
-    cp -r pack_3/hud/* $out/share/plymouth/themes/hud/
+    mkdir -p $out/share/plymouth/themes/optimus
+
+    cp -r pack_3/optimus/* \
+      $out/share/plymouth/themes/optimus/
+
+    # Fix paths for NixOS
+    substituteInPlace $out/share/plymouth/themes/optimus/optimus.plymouth \
+      --replace-fail "/usr/share/plymouth/themes/optimus" \
+      "$out/share/plymouth/themes/optimus"
   '';
 }

@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 {
-  options.lun.profiles.common = (lib.mkEnableOption "Enable common profile") // { default = true; };
+  options.lun.desktop_interface.common = (lib.mkEnableOption "Enable common desktop_interface") // { default = true; };
 
-  config = lib.mkIf config.lun.profiles.common {
+  config = lib.mkIf config.lun.desktop_interface.common {
     my.home-manager.enabled-users = [ "lun" ];
 
     # LANGUAGE / I18N
@@ -21,7 +21,7 @@
         };
       };
     time = {
-      timeZone = "America/Los_Angeles";
+      timeZone = "Asia/Karachi";
     };
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.variant = "altgr-intl"; # «cool and new»

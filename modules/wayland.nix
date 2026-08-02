@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 {
-  config = lib.mkIf config.lun.profiles.graphical {
+  config = lib.mkIf config.lun.desktop_interface.graphical {
     security.pam.services.hyprlock = { };
     programs.hyprland = {
       enable = true;

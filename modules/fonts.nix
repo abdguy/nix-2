@@ -4,7 +4,7 @@
 let lotsOfFonts = false;
 in
 {
-  fonts = lib.mkIf config.lun.profiles.graphical {
+  fonts = lib.mkIf config.lun.desktop_interface.graphical {
     enableDefaultPackages = false;
 
     packages = lib.mkForce (with pkgs; [
@@ -36,10 +36,6 @@ in
       # General fonts
       liberation_ttf
       ttf_bitstream_vera
-
-      # Japanese
-      ipafont
-      kochi-substitute
 
       # Code/monospace and nsymbol fonts
       mplus-outline-fonts.osdnRelease

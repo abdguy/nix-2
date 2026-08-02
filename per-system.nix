@@ -66,7 +66,7 @@ let
             config = {
               home-manager.extraSpecialArgs = {
                 inherit flakeArgs;
-                lun-profiles = config.lun.profiles;
+                lun-desktop_interface = config.lun.desktop_interface;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -105,7 +105,7 @@ let
             extraSpecialArgs = {
               inherit flakeArgs;
               nixosConfig = null;
-              lun-profiles = {
+              lun-desktop_interface = {
                 graphical = true;
                 personal = true;
                 wine = false;

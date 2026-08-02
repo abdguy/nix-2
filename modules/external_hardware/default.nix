@@ -15,7 +15,7 @@
       '';
     }
 
-    (lib.mkIf config.lun.profiles.graphical {
+    (lib.mkIf config.lun.desktop_interface.graphical {
       services.libinput = {
         # Enable touchpad/mouse
         enable = true;
@@ -28,7 +28,7 @@
       # udev rule for zsa oryx
       hardware.keyboard.zsa.enable = true;
       # steam controller and index headset, only works on x86_64 as of 202309
-      hardware.steam-hardware.enable = lib.mkIf (pkgs.stdenv.hostPlatform.system == "x86_64-linux") true;
+      #hardware.steam-hardware.enable = lib.mkIf (pkgs.stdenv.hostPlatform.system == "x86_64-linux") true;
       # udev rules for ledger
       hardware.ledger.enable = true;
 
@@ -54,8 +54,8 @@
       hardware.cpu.intel.updateMicrocode = true;
 
       programs.noisetorch.enable = true;
-      networking.firewall.allowedTCPPorts = [ 24800 ];
-      networking.firewall.allowedUDPPorts = [ 24800 ];
+      #networking.firewall.allowedTCPPorts = [ 24800 ];
+      #networking.firewall.allowedUDPPorts = [ 24800 ];
 
       # FIXME: xone doesn't work with wireless, seems unmaintained?
       # find something better or patch it

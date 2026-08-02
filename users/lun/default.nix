@@ -1,12 +1,13 @@
-{ lib, pkgs, lun-profiles, ... }:
+{ lib, pkgs, lun-desktop_interface, ... }:
 {
   imports = [
     ./modern-unix.nix
     ./shells
     ./on-nixos
     ./jujutsu.nix
-  ] ++ lib.optionals lun-profiles.graphical [
+  ] ++ lib.optionals lun-desktop_interface.graphical [
     ./gui
+    ./gui/hyprland
   ];
 
   manual.manpages.enable = false;

@@ -1,8 +1,7 @@
 { flakeArgs, pkgs, lib, ... }:
-
 let
-  myPlymouthTheme =
-    flakeArgs.self.localPackagesForPkgs pkgs.plymouth;
+  local = flakeArgs.self.localPackagesForPkgs pkgs;
+
 in
 {
   boot = {
@@ -10,17 +9,19 @@ in
 
     loader = {
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = false;
+      efi.canTouchEfiVariables = true;
     };
 
     plymouth = {
       enable = true;
 
-      theme = "hud";
+      theme = "optimus";
 
       themePackages = [
-        myPlymouthTheme
+        local.plymouth-theme
+
       ];
     };
   };
 }
+
