@@ -25,3 +25,68 @@ cd /mnt/etc/nixos
 ```
 
 Create a disko.nix file and paste the following code into it.
+
+```
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  # Temporary root filesystem (RAM)
+  fileSystems."/" = {
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [
+      "defaults"
+      "size=2G"
+      "mode=755"
+    ];
+    neededForBoot = true;
+  };
+
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Enable networking
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+
+  # Time zone
+  time.timeZone = "Asia/Karachi";
+
+  # Locale
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # User
+  users.users.user = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    password = "password";
+  };
+
+  # Allow sudo
+  security.sudo.wheelNeedsPassword = false;
+
+  # Basic packages
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    wget
+    curl
+  ];
+
+  # Enable SSH (optional)
+  services.openssh.enable = true;
+
+  # Nix settings
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  system.stateVersion = "25.05";
+}
+```
