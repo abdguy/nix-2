@@ -25,7 +25,7 @@ cd /mnt/etc/nixos
 ```
 
 Create a disko.nix file and paste the following code into it.
-
+```
 { lib, ... }:
 
 {
@@ -92,23 +92,23 @@ Create a disko.nix file and paste the following code into it.
     };
   };
 }
-
+```
 
 After saving the code in disko.nix, run the following commands:
-
+```
 sudo disko --mode destroy,format,mount ./disko.nix
 
 sudo nixos-generate-config --root /mnt
-
+```
 
 Now open the hardware-configuration.nix file, which is located in the /mnt/etc/nixos directory, and add the following fileSystems entry. You can also refer to the example in the repository at hosts/amayadori/hardware-configuration.nix.
-
+```
 fileSystems."/" = {
   device = "tmpfs";
   fsType = "tmpfs";
   options = [ "defaults" "size=2G" "mode=755" ];
   neededForBoot = true;
 };
-
+```
 
 Also, add lib.mkForce to the swap filesystem configuration as shown in the repository.
