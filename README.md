@@ -1,5 +1,10 @@
+These are some views of the system
+
 
 <img width="1599" height="899" alt="image" src="https://github.com/user-attachments/assets/b53402b6-f8cc-4fe5-8bfd-f855f6484a9b" />
+<img width="1599" height="899" alt="image" src="https://github.com/user-attachments/assets/1c3dac01-460e-46b6-abde-9fc7bd32d71a" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/443ef396-71ac-4466-a005-48e9677c66ba" />
+
 
 
 
