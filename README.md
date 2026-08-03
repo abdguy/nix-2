@@ -112,3 +112,16 @@ fileSystems."/" = {
 ```
 
 Also, add lib.mkForce to the swap filesystem configuration as shown in the repository.
+
+After saving, copy the whole repository and make sure the hardware-configuration.nix file from the repository is replaced by the newly generated one.
+
+Then run:
+```
+nixos-rebuild switch \
+  --flake .#hackson-amayadori-nixos \
+  --target-host lun \
+  --use-remote-sudo \
+  --ask-elevate-password
+```
+
+Note that this configuration is still under development, so make sure you have some knowledge of NixOS before using it.
