@@ -1,3 +1,13 @@
+
+<img width="1599" height="899" alt="image" src="https://github.com/user-attachments/assets/b53402b6-f8cc-4fe5-8bfd-f855f6484a9b" />
+
+
+
+
+
+
+
+
 This is the Nix configuration for the whole system that will be used to configure your NixOS manually and automatically. You can also contribute to it.
 
 Okay, but currently it is integrated with scripts. When you run install.sh on your NixOS system, it will automatically detect the UUID of your disk and automatically create the partitions.
