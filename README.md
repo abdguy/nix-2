@@ -26,7 +26,6 @@ cd /mnt/etc/nixos
 
 Create a disko.nix file and paste the following code into it.
 
-```
 { lib, ... }:
 
 {
@@ -93,24 +92,23 @@ Create a disko.nix file and paste the following code into it.
     };
   };
 }
-```
-after savin gthe code in disko.nix run the following command
 
-```
-disko --mode destroy,format,mount ./disko.nix
 
-sudo nixos-config-generate --root /mnt
-```
-now open the hardware-configuration file which is present in directory /mnt/etc/nixos and ad the the following line inside the file system .you can also view the code present int he repo  hosts/amayadori/hardware-configuration.nix
+After saving the code in disko.nix, run the following commands:
 
-```
-fileSystems."/" =
-    { device = "tmpfs";
-      fsType = "tmpfs";
-      options = [ "defaults" "size=2G" "mode=755"];
-      neededForBoot = true;
-    };
-```
-also add the 
-` lib.mkForce `
-in swap filesystem
+sudo disko --mode destroy,format,mount ./disko.nix
+
+sudo nixos-generate-config --root /mnt
+
+
+Now open the hardware-configuration.nix file, which is located in the /mnt/etc/nixos directory, and add the following fileSystems entry. You can also refer to the example in the repository at hosts/amayadori/hardware-configuration.nix.
+
+fileSystems."/" = {
+  device = "tmpfs";
+  fsType = "tmpfs";
+  options = [ "defaults" "size=2G" "mode=755" ];
+  neededForBoot = true;
+};
+
+
+Also, add lib.mkForce to the swap filesystem configuration as shown in the repository.
