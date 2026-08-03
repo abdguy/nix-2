@@ -21,11 +21,7 @@ nix-shell -p disko
 
 Press Enter. This will install Disko in a temporary shell. After that, run the following commands:
 
-```sudo mkdir -p /mnt/etc/nixos/
-cd /mnt/etc/nixos```
-
-
-
-
+sudo mkdir -p /mnt/etc/nixos/
+cd /mnt/etc/nixos
 
 Create a disko.nix file and paste the following code into it.
