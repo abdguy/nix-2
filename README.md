@@ -20,7 +20,7 @@ To install NixOS in Virt Manager, boot the NixOS ISO image and install Disko in 
 
 Press Enter. This will install Disko in a temporary shell. After that, run the following commands:
 
-sudo mkdir -p /mnt/etc/nixos/
+```sudo mkdir -p /mnt/etc/nixos/
 cd /mnt/etc/nixos```
 
 Create a disko.nix file and paste the following code into it.
