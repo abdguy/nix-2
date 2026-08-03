@@ -27,66 +27,90 @@ cd /mnt/etc/nixos
 Create a disko.nix file and paste the following code into it.
 
 ```
-{ config, pkgs, ... }:
+{ lib, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  disko.devices = {
+    disk.main = {
+      device = "/dev/nvme0n1";
+      type = "disk";
 
-  # Temporary root filesystem (RAM)
-  fileSystems."/" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
-    options = [
-      "defaults"
-      "size=2G"
-      "mode=755"
-    ];
-    neededForBoot = true;
+      content = {
+        type = "gpt";
+
+        partitions = {
+          ESP = {
+            size = "512M";
+            type = "EF00";
+
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
+            };
+          };
+
+          swap = {
+            size = "8G";
+
+            content = {
+              type = "swap";
+            };
+          };
+
+          system = {
+            size = "50G";
+
+            content = {
+              type = "btrfs";
+
+              subvolumes = {
+                "@nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+
+                "@persist" = {
+                  mountpoint = "/persist";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+              };
+            };
+          };
+
+          rest = {
+            size = "100%";
+          };
+        };
+      };
+    };
   };
-
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Enable networking
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-
-  # Time zone
-  time.timeZone = "Asia/Karachi";
-
-  # Locale
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  # User
-  users.users.user = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-    password = "password";
-  };
-
-  # Allow sudo
-  security.sudo.wheelNeedsPassword = false;
-
-  # Basic packages
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    curl
-  ];
-
-  # Enable SSH (optional)
-  services.openssh.enable = true;
-
-  # Nix settings
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  system.stateVersion = "25.05";
 }
 ```
+after savin gthe code in disko.nix run the following command
+
+```
+disko --mode destroy,format,mount ./disko.nix
+
+sudo nixos-config-generate --root /mnt
+```
+now open the hardware-configuration file which is present in directory /mnt/etc/nixos and ad the the following line inside the file system .you can also view the code present int he repo  hosts/amayadori/hardware-configuration.nix
+
+```
+fileSystems."/" =
+    { device = "tmpfs";
+      fsType = "tmpfs";
+      options = [ "defaults" "size=2G" "mode=755"];
+      neededForBoot = true;
+    };
+```
+also add the 
+` lib.mkForce `
+in swap filesystem
