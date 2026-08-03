@@ -1,7 +1,7 @@
 { lib, config, ... }:
 {
-  config = lib.mkIf config.lun.desktop_interface.androidDev {
+  config = lib.mkIf config.hackson.desktop_interface.androidDev {
     programs.adb.enable = true;
-    users.users.lun.extraGroups = [ "adbusers" ];
+    users.users.hackson.extraGroups = [ "adbusers" ];
   };
 }

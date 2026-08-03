@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.lun.amd-ml;
+  cfg = config.hackson.amd-ml;
 in
 {
-  options.lun.amd-ml = {
+  options.hackson.amd-ml = {
     enable = mkEnableOption "AMD ML-specific optimizations";
 
     opinionatedDefaults = mkOption {
@@ -124,7 +124,7 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.opinionatedDefaults {
-      lun.amd-ml.kernelParams = {
+      hackson.amd-ml.kernelParams = {
         pcie = mkDefault true;
         amdgpu = {
           rasEnable = mkDefault false;
@@ -135,11 +135,11 @@ in
         };
         iommu = mkDefault "pt";
       };
-      lun.amd-ml.useLatestKernel = mkDefault true;
+      hackson.amd-ml.useLatestKernel = mkDefault true;
     })
 
     (mkIf cfg.disableEcc {
-      lun.amd-ml.kernelParams.ras_enable = false;
+      hackson.amd-ml.kernelParams.ras_enable = false;
 
       # boot.kernelPatches = [
       #   {

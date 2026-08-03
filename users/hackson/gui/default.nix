@@ -1,4 +1,4 @@
-{ pkgs, lib, lun-desktop_interface, nixosConfig, ... }:
+{ pkgs, lib, hackson-desktop_interface, nixosConfig, ... }:
 {
   imports = [
     ./dev.nix
@@ -7,7 +7,7 @@
     ./kitty.nix
     ./compose-key.nix
     ./agent-jail.nix
-  ] ++ lib.optionals (lun-desktop_interface.personal or false) ([
+  ] ++ lib.optionals (hackson-desktop_interface.personal or false) ([
     # ./conky.nix # TODO: perf issues
     ./cad
     ./music.nix
@@ -17,18 +17,15 @@
   ] ++ lib.optionals (nixosConfig != null) [
     ./rose-pine.nix
     ./i3
-    # ./sway
     ./hyprland
-  ]) ++ lib.optionals (lun-desktop_interface.gaming or false) [
-    ./gaming.nix
-    ./vr-gaming.nix
-  ];
+  ]);
 
   config = {
     programs.firefox = {
       enable = true;
       package = pkgs.firefox;
     };
+
 
     # workaround https://github.com/nix-community/home-manager/issues/2064#issuecomment-887300055
     systemd.user.targets.tray = {
@@ -39,9 +36,9 @@
     };
 
     home.packages = [
-      pkgs.lun.spawn
+      pkgs.hackson.spawn
     ] ++
-    lib.optionals ((pkgs.stdenv.hostPlatform.system == "x86_64-linux") && lun-desktop_interface.personal or false) (with pkgs; [
+    lib.optionals ((pkgs.stdenv.hostPlatform.system == "x86_64-linux") && hackson-desktop_interface.personal or false) (with pkgs; [
       pinta # paint.net alternative
       calibre
       kdePackages.ark

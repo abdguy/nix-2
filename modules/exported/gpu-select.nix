@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  cfg = config.lun.gpu-select;
+  cfg = config.hackson.gpu-select;
   env = {
     # makes mesa's device select layer expose only the default device
     # this will be the selected card usually, or if DRI_PRIME is set the first GPU in the system that isn't that and isn't CPU
@@ -16,7 +16,7 @@ let
   });
 in
 {
-  options.lun.gpu-select = {
+  options.hackson.gpu-select = {
     enable = lib.mkEnableOption "enable gpu selection";
     card = lib.mkOption {
       type = with lib.types; nullOr str;

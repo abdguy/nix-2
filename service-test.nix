@@ -1,6 +1,6 @@
 _:
 # everything for unprivileged service testing is here except a bit of deploy boilerplate/getting inputs to the right place
-# which is under testSingleServiceDeployAslunOnLocalhost in flake.nix
+# which is under testSingleServiceDeployAshacksonOnLocalhost in flake.nix
 let
   self = {
     # nixos module for host system which enables systemd lingering

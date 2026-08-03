@@ -2,7 +2,7 @@
 {
   config = lib.mkMerge [
     {
-      # FIXME: causes spurious GPU resumes https://lunnova.dev/articles/linux-gpu-runpm-spurious-resumes/
+      # FIXME: causes spurious GPU resumes https://hacksonnova.dev/articles/linux-gpu-runpm-spurious-resumes/
       # would prefer to enable
       services.fwupd.enable = true;
       hardware.wirelessRegulatoryDatabase = true;
@@ -15,7 +15,7 @@
       '';
     }
 
-    (lib.mkIf config.lun.desktop_interface.graphical {
+    (lib.mkIf config.hackson.desktop_interface.graphical {
       services.libinput = {
         # Enable touchpad/mouse
         enable = true;

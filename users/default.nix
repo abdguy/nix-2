@@ -25,39 +25,27 @@ in
 
 
   config = lib.mkMerge [
-    (lib.mkIf (builtins.elem "lun" cfg.enabled-users) {
+    (lib.mkIf (builtins.elem "hackson" cfg.enabled-users) {
       home-manager.users = {
-        lun = ./lun;
+        hackson = ./hackson;
       };
 
-      services.impermanent-user-passwords = lib.mkIf config.lun.persistence.enable {
+      services.impermanent-user-passwords = lib.mkIf config.hackson.persistence.enable {
         enable = true;
-        username = "lun";
-        persistLocation = "${config.lun.persistence.persistPath}/secrets/lun-hashFile";
+        username = "hackson";
+        persistLocation = "${config.hackson.persistence.persistPath}/secrets/hackson-hashFile";
         initialPassword = "hack-son-nix";
       };
 
-      users.users.lun = {
+      users.users.hackson = {
         isNormalUser = true;
         shell = pkgs.fish;
         # TODO: are these sensible
         extraGroups = adminGroups;
-      } // lib.optionalAttrs (!config.lun.persistence.enable) {
+      } // lib.optionalAttrs (!config.hackson.persistence.enable) {
         hashedPassword = "$6$jggJHhOd2onE5Zc.$fjbOIgcXWhcyyC3HmHOEh1Q./g8ZrxtXpMmsQo4dfo9VYTisBRv4GBmNXqzpBC8hyrJE7w0EXrmttuaMX8eBf1";
       };
     })
-    (lib.mkIf (builtins.elem "mmk" cfg.enabled-users) {
-      home-manager.users = {
-        mmk = ./mmk;
-      };
 
-      users.users.mmk = {
-        isNormalUser = true;
-        shell = pkgs.fish;
-        # Change after install
-        initialPassword = "nix-placeholder";
-        extraGroups = adminGroups;
-      };
-    })
   ];
 }

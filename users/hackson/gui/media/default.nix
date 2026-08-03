@@ -22,7 +22,7 @@ in
 
       home.file.".config/mpv/svp.py".source = pkgs.substituteAll {
         src = ./svp.py;
-        svpflow = "${pkgs.lun.svpflow}/lib/";
+        svpflow = "${pkgs.hackson.svpflow}/lib/";
         mvtoolslib = "${pkgs.vapoursynth-mvtools}/lib/vapoursynth/";
       };
 

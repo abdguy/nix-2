@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 {
-  options.lun.print.enable = lib.mkEnableOption "Enable printing and scanning";
-  config = lib.mkIf config.lun.print.enable {
+  options.hackson.print.enable = lib.mkEnableOption "Enable printing and scanning";
+  config = lib.mkIf config.hackson.print.enable {
     services.printing = {
       enable = true;
       drivers = [

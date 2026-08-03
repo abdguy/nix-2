@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.lun.conservative-governor;
+  cfg = config.hackson.conservative-governor;
 in
 {
-  options.lun.conservative-governor = {
+  options.hackson.conservative-governor = {
     enable = lib.mkEnableOption "conservative cpufreq governor";
   };
   config = lib.mkIf cfg.enable

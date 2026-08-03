@@ -12,6 +12,6 @@
       allowedUDPPorts = [ config.services.tailscale.port ];
     };
 
-    lun.persistence.dirs = [ "/var/lib/tailscale" ];
+    hackson.persistence.dirs = [ "/var/lib/tailscale" ];
   };
 }

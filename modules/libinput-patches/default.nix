@@ -1,10 +1,10 @@
 # Copied from github:buckley310/nixos-config, MIT
 { config, lib, ... }:
 let
-  cfg = config.lun.libinput-patches;
+  cfg = config.hackson.libinput-patches;
 in
 {
-  options.lun.libinput-patches =
+  options.hackson.libinput-patches =
     {
       double-scroll-speed = lib.mkEnableOption "Double mouse scroll speed in xf86libinput (X11 only)";
       accel-default-off = lib.mkEnableOption "Disable mouse acceleration by default in libinput";

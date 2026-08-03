@@ -10,7 +10,7 @@
       Service = {
         Type = "forking";
         ExecStart = ''
-          ${pkgs.bash}/bin/bash -c 'export PATH=${lib.makeBinPath [ pkgs.lm_sensors ]}''${PATH:+:}$PATH;export ACTIVE_GPU="$(${pkgs.lun.lun-scripts.active-gpu-path}/bin/active-gpu-path)";exec ${pkgs.conky}/bin/conky --daemonize'
+          ${pkgs.bash}/bin/bash -c 'export PATH=${lib.makeBinPath [ pkgs.lm_sensors ]}''${PATH:+:}$PATH;export ACTIVE_GPU="$(${pkgs.hackson.hackson-scripts.active-gpu-path}/bin/active-gpu-path)";exec ${pkgs.conky}/bin/conky --daemonize'
         '';
         OOMPolicy = "kill";
       };

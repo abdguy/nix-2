@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.lun.amd-mem-encrypt;
+  cfg = config.hackson.amd-mem-encrypt;
 in
 {
-  options.lun.amd-mem-encrypt = {
+  options.hackson.amd-mem-encrypt = {
     enable = lib.mkEnableOption ''
       Enable AMD memory encryption.
       This protects the host system and containers. Further config may be needed for VMs. ("nested paging")

@@ -30,21 +30,20 @@ in
 
     ];
 
-  lun.power-saving.enable = true;
-  lun.power-saving.usb = true;
-  lun.persistence.enable = true;
-  lun.persistence.dirs = [
+  hackson.power-saving.enable = true;
+  hackson.power-saving.usb = true;
+  hackson.persistence.enable = true;
+  hackson.persistence.dirs = [
     "/tmp"
     "/var/lib/sddm"
   ];
-  lun.conservative-governor.enable = true;
-  services.displayManager.defaultSession = "hyprland";
-  lun.virtualisation.enable = lib.mkForce false;
+  hackson.conservative-governor.enable = true;
+  hackson.virtualisation.enable = lib.mkForce false;
 
   services.udisks2.enable = true; # required for automounting with udiskie
   boot.plymouth.enable = true;
 
-  networking.hostName = "lun-amayadori-nixos";
+  networking.hostName = "hackson-amayadori-nixos";
   sconfig.machineId = "1f3c8ec5230e763537ec8ef5836f334a";
   system.stateVersion = "26.05";
 

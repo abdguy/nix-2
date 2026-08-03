@@ -4,7 +4,7 @@ IFS=$'\n'
 
 # edit these fields
 PART_PREFIX=amayadori
-HOSTNAME="lun-$NAME-nixos"
+HOSTNAME="hackson-$NAME-nixos"
 
 BOOT_PARTITION=/dev/disk/by-partlabel/'EFI\x20system\x20partition'
 PERSIST_PARTITION=/dev/disk/by-label/"$PART_PREFIX"_persist
@@ -19,7 +19,7 @@ mount "$PERSIST_PARTITION" -o defaults,ssd,nosuid,nodev,compress=zstd,noatime,su
 
 mkdir -p /mnt/{boot,persist,home,nix,var/log} /mnt/persist/{home,nix,var/log,etc/ssh,root}
 
-for dir in $(nix eval --raw ".#nixosConfigurations.$HOSTNAME.config.lun.persistence.dirs_for_shell_script"); do
+for dir in $(nix eval --raw ".#nixosConfigurations.$HOSTNAME.config.hackson.persistence.dirs_for_shell_script"); do
 	mkdir -p "/mnt$dir" "/mnt/persist$dir"
 	mount -o bind "/mnt/persist$dir" "/mnt$dir" || true
 done

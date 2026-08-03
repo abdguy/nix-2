@@ -1,6 +1,6 @@
 _:
 {
-  users.users.lun = {
+  users.users.hackson = {
     uid = 1000;
     isNormalUser = true;
 

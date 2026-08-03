@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.lun.efi-tools;
+  cfg = config.hackson.efi-tools;
   inherit (config.boot.loader) efi;
   copyTool = source: dest_filename:
     ''
@@ -26,7 +26,7 @@ let
   efiFileName = efiFileNames.${pkgs.stdenv.hostPlatform.system} or (builtins.throw "Unknown EFI filename for ${pkgs.stdenv.hostPlatform.system}");
 in
 {
-  options.lun.efi-tools = {
+  options.hackson.efi-tools = {
     enable = lib.mkEnableOption "Enable copying tools to EFI System Partition tools directory";
     tools = lib.mkOption {
       default = { };
@@ -35,7 +35,7 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    lun.efi-tools.tools = {
+    hackson.efi-tools.tools = {
       memtest86oss = lib.mkDefault pkgs.memtest86plus.efi;
       memtest86 = lib.mkDefault "${pkgs.memtest86-efi}/${efiFileName}";
       shell = lib.mkDefault pkgs.edk2-uefi-shell.efi;

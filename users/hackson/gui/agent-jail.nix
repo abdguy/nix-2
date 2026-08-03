@@ -1,4 +1,4 @@
-{ pkgs, lib, flakeArgs, lun-desktop_interface, ... }:
+{ pkgs, lib, flakeArgs, hackson-desktop_interface, ... }:
 let
   llm-agents = flakeArgs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 
@@ -77,7 +77,7 @@ let
           --ro-bind "/usr/bin/env" /usr/bin/env \
           --ro-bind-try /run/systemd/resolve /run/systemd/resolve \
           --ro-bind /nix/store /nix/store \
-          --ro-bind /etc/profiles/per-user/lun/bin /etc/profiles/per-user/lun/bin \
+          --ro-bind /etc/profiles/per-user/hackson/bin /etc/profiles/per-user/hackson/bin \
           --ro-bind /run/current-system/sw/bin /run/current-system/sw/bin \
           --bind "$PWD" "$PWD" \
           ${bindArgs} \
@@ -114,7 +114,7 @@ let
   };
 in
 {
-  config = lib.mkIf (lun-desktop_interface.personal or false) {
+  config = lib.mkIf (hackson-desktop_interface.personal or false) {
     home.packages = [
       pkgs.code-cursor
       llm-agents.codex

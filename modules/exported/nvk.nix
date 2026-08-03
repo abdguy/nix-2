@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  cfg = config.lun.nvk;
+  cfg = config.hackson.nvk;
   env = {
     NVK_I_WANT_A_BROKEN_VULKAN_DRIVER = "1";
     MESA_VK_VERSION_OVERRIDE = "1.3";
@@ -11,7 +11,7 @@ let
   };
 in
 {
-  options.lun.nvk = {
+  options.hackson.nvk = {
     enable = lib.mkEnableOption "nvk experimental module";
   };
   config = lib.mkIf (cfg.enable && true) {

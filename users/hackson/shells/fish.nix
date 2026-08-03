@@ -35,7 +35,7 @@
     '';
 
     # global fish config
-    ".config/fish/conf.d/lun.fish".text = ''
+    ".config/fish/conf.d/hackson.fish".text = ''
       set -gx EDITOR vim
       history --save
       history --merge

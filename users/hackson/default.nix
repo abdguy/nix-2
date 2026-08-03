@@ -1,13 +1,13 @@
-{ lib, pkgs, lun-desktop_interface, ... }:
+{ lib, pkgs, hackson-desktop_interface, ... }:
 {
   imports = [
+
     ./modern-unix.nix
     ./shells
     ./on-nixos
     ./jujutsu.nix
-  ] ++ lib.optionals lun-desktop_interface.graphical [
+  ] ++ lib.optionals hackson-desktop_interface.graphical [
     ./gui
-    ./gui/hyprland
   ];
 
   manual.manpages.enable = false;
@@ -17,8 +17,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "lun";
-  home.homeDirectory = "/home/lun";
+  home.username = "hackson";
+  home.homeDirectory = "/home/hackson";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -59,7 +59,7 @@
 
       gpg.format = lib.mkForce "ssh";
       commit.gpgsign = true;
-      user.signingkey = "/home/lun/.ssh/git_signing_key.pub";
+      user.signingkey = "/home/hackson/.ssh/git_signing_key.pub";
 
       diff.colorMoved = "zebra";
       fetch.prune = true;
@@ -84,6 +84,8 @@
       include.path = "./local";
     };
   };
+
+
 
   programs.nix-index.enable = true;
 

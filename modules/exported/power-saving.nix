@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.lun.power-saving;
+  cfg = config.hackson.power-saving;
 in
 {
-  options.lun.power-saving = {
+  options.hackson.power-saving = {
     enable = lib.mkEnableOption "Enable power saving configs";
     usb = lib.mkEnableOption "Enable USB power saving configs (tends to break some peripherals so only use on laptops?)";
   };

@@ -109,7 +109,7 @@ in
     "${local."hyprlock-style"}/share/hyprlock/Fonts";
 
 
-  lun.hyprland-idle = {
+  hackson.hyprland-idle = {
     enable = true;
     dimPercentage = 5;
     dimTimeout = 60;

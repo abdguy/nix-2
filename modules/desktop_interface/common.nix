@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 {
-  options.lun.desktop_interface.common = (lib.mkEnableOption "Enable common desktop_interface") // { default = true; };
+  options.hackson.desktop_interface.common = (lib.mkEnableOption "Enable common desktop_interface") // { default = true; };
 
-  config = lib.mkIf config.lun.desktop_interface.common {
-    my.home-manager.enabled-users = [ "lun" ];
+  config = lib.mkIf config.hackson.desktop_interface.common {
+    my.home-manager.enabled-users = [ "hackson" ];
 
     # LANGUAGE / I18N
     i18n = let locale = "en_US.UTF-8"; in
@@ -69,7 +69,7 @@
 
     # NETWORKING
     networking = {
-      networkmanager.enable = true;
+      networkmanager.enable = false;
       # TODO: file bug for iwd network connection secrets issue
       # networkmanager.wifi.backend = "iwd";
     };
@@ -100,7 +100,7 @@
         KbdInteractiveAuthentication = false;
       };
     };
-    lun.persistence.dirs = [ "/etc/ssh" ];
+    hackson.persistence.dirs = [ "/etc/ssh" ];
 
     # BOOT
     boot = {
@@ -200,7 +200,7 @@
       traceroute
       dnsutils
       libfaketime
-      lun.lun
+      hackson.hackson
     ];
 
     # systemd

@@ -42,20 +42,20 @@ let
     in
     builtins.listToAttrs (map (x: lib.nameValuePair x (pkgs.resholve.writeScriptBin x resholvCfg (builtins.readFile "${path}/${x}.sh"))) scripts);
 
-  lun-scripts-path = pkgs.symlinkJoin { name = "lun-scripts"; paths = lib.attrValues self.lun-scripts; };
+  hackson-scripts-path = pkgs.symlinkJoin { name = "hackson-scripts"; paths = lib.attrValues self.hackson-scripts; };
   # https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/19101.patch
   mesaOverride =
     mesaPkg: (mesaPkg.overrideAttrs (_old: { }));
   self = {
-    lun-scripts = wrapScripts ./lun-scripts;
+    hackson-scripts = wrapScripts ./hackson-scripts;
     xdg-open-with-portal = pkgs.callPackage ./xdg-open-with-portal { };
     vkpeak = pkgs.callPackage ./vkpeak { };
     compositor-killer = pkgs.callPackage ./compositor-killer { };
     samrewritten = pkgs.callPackage ./samrewritten { };
     sillytavern = pkgs.callPackage ./sillytavern { };
     spawn = pkgs.callPackage ./spawn { };
-    lun = pkgs.writeShellScriptBin "lun" ''
-      exec "${lun-scripts-path}/bin/$1" "''${@:2}"
+    hackson = pkgs.writeShellScriptBin "hackson" ''
+      exec "${hackson-scripts-path}/bin/$1" "''${@:2}"
     '';
     mtoc = pkgs.callPackage ./mtoc { };
     obsbot-camera-control = pkgs.callPackage ./obsbot-camera-control { };

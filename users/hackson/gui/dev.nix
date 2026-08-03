@@ -1,4 +1,4 @@
-{ pkgs, config, lib, flakeArgs, lun-desktop_interface, ... }:
+{ pkgs, config, lib, flakeArgs, hackson-desktop_interface, ... }:
 let
   sshAddDefault = pkgs.writeShellApplication {
     name = "sshAddDefault";
@@ -23,7 +23,7 @@ in
       mesa-demos
       vulkan-tools
       nurl # nix-prefetch-url but better
-    ] ++ lib.optionals lun-desktop_interface.personal [
+    ] ++ lib.optionals hackson-desktop_interface.personal [
       flakeArgs.deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # LSPs
@@ -36,7 +36,7 @@ in
       crates-lsp
 
       # waylandn't
-      # pkgs.lun.compositor-killer # FIXME: wayland-scanner not found
+      # pkgs.hackson.compositor-killer # FIXME: wayland-scanner not found
       nix-diff
       rehex
       meld # graphical diff, lets you paste in pretty easily

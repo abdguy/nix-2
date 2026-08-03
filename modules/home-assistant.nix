@@ -1,11 +1,11 @@
 { lib, config, ... }:
-let cfg = config.lun.home-assistant; in
+let cfg = config.hackson.home-assistant; in
 {
   options = {
-    lun.home-assistant.enable = lib.mkEnableOption "enable HA containers";
+    hackson.home-assistant.enable = lib.mkEnableOption "enable HA containers";
   };
   config = lib.mkIf cfg.enable {
-    lun.persistence.dirs = [ "/var/lib/home-assistant" ];
+    hackson.persistence.dirs = [ "/var/lib/home-assistant" ];
 
     systemd.services.podman.after = [ "NetworkManager-wait-online.service" ];
     systemd.services.podman.wants = [ "NetworkManager-wait-online.service" ];

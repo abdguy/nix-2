@@ -5,7 +5,7 @@
     ./graphical.nix
   ];
 
-  options.lun.desktop_interface = {
+  options.hackson.desktop_interface = {
     androidDev = lib.mkEnableOption "enable android development";
     personal = lib.mkEnableOption "personal system (not shared)";
   };

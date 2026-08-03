@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.lun.amd-pstate;
+  cfg = config.hackson.amd-pstate;
 in
 {
-  options.lun.amd-pstate = {
+  options.hackson.amd-pstate = {
     enable = lib.mkEnableOption "Enable amd_pstate and its unit tests";
     mode = lib.mkOption {
       type = lib.types.enum [ "passive" "guided" "active" ];

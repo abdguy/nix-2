@@ -16,7 +16,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.lun.wg-netns;
+  cfg = config.hackson.wg-netns;
   ip = "${pkgs.iproute2}/bin/ip";
   ifName = "wg0";
   nsName = "wg";
@@ -25,7 +25,7 @@ let
   nsswitchconf = pkgs.writeText "wg-nsswitch.conf" "hosts: files dns";
 in
 {
-  options.lun.wg-netns = with lib; {
+  options.hackson.wg-netns = with lib; {
     enable = mkEnableOption "Wireguard netns container";
 
     configFile = mkOption {

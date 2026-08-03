@@ -4,7 +4,7 @@
 let lotsOfFonts = false;
 in
 {
-  fonts = lib.mkIf config.lun.desktop_interface.graphical {
+  fonts = lib.mkIf config.hackson.desktop_interface.graphical {
     enableDefaultPackages = false;
 
     packages = lib.mkForce (with pkgs; [
@@ -30,8 +30,8 @@ in
       noto-fonts-cjk-sans
 
       # Apple UI fonts, override XML below sets these as monospace default
-      lun.sf-pro
-      lun.sf-mono
+      hackson.sf-pro
+      hackson.sf-mono
     ] ++ lib.optionals lotsOfFonts [
       # General fonts
       liberation_ttf

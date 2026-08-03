@@ -15,7 +15,7 @@ let
       # })
       flakeArgs.self.overlays.default
       (import ./overlay-nixpkgs.nix { inherit flakeArgs; })
-      flakeArgs.lun-pkgs.overlays.default
+      flakeArgs.hackson-pkgs.overlays.default
     ] ++ lib.optionals (system == "aarch64-linux") [
       (import "${flakeArgs.x1e-nixos-config}/packages/overlay.nix")
     ];
@@ -66,7 +66,7 @@ let
             config = {
               home-manager.extraSpecialArgs = {
                 inherit flakeArgs;
-                lun-desktop_interface = config.lun.desktop_interface;
+                hackson-desktop_interface = config.hackson.desktop_interface;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -105,7 +105,7 @@ let
             extraSpecialArgs = {
               inherit flakeArgs;
               nixosConfig = null;
-              lun-desktop_interface = {
+              hackson-desktop_interface = {
                 graphical = true;
                 personal = true;
                 wine = false;
@@ -121,24 +121,24 @@ let
           };
       in
       {
-        lun = makeUser "lun";
+        hackson = makeUser "hackson";
         mmk = makeUser "mmk";
       };
     slowChecks = rec {
       all-packages = perSystemSelf.pkgs.symlinkJoin {
-        name = "lun packages.${system}";
+        name = "hackson packages.${system}";
         paths = lib.attrValues perSystemSelf.packages;
       };
       all-systems = perSystemSelf.pkgs.symlinkJoin {
-        name = "lun nixosConfigurations for system ${system}";
+        name = "hackson nixosConfigurations for system ${system}";
         paths = lib.filter (x: x.system == system) (map (cfg: flakeArgs.self.nixosConfigurations.${cfg}.config.system.build.toplevel) (builtins.attrNames flakeArgs.self.nixosConfigurations));
       };
       all-users = perSystemSelf.pkgs.symlinkJoin {
-        name = "lun homeConfigurations for system ${system}";
+        name = "hackson homeConfigurations for system ${system}";
         paths = map (x: x.activationPackage) (lib.attrValues perSystemSelf.homeConfigurations);
       };
       all = perSystemSelf.pkgs.symlinkJoin {
-        name = "lun all";
+        name = "hackson all";
         paths = [ all-packages all-systems all-users ];
       };
     };

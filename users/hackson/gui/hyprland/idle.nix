@@ -1,13 +1,13 @@
 { pkgs, config, lib, ... }:
 let
-  idleCfg = config.lun.hyprland-idle;
+  idleCfg = config.hackson.hyprland-idle;
   hyprCmd = "hyprctl";
   hyprlandTargets = [
     "wayland-session@Hyprland.target"
   ];
 in
 {
-  options.lun.hyprland-idle = {
+  options.hackson.hyprland-idle = {
     enable = lib.mkEnableOption "Hyprland idle configuration";
 
     keyPressEnablesDpms = lib.mkOption {

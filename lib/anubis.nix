@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.lun.anubis;
+  cfg = config.hackson.anubis;
 in
 {
-  options.lun.anubis = {
+  options.hackson.anubis = {
     enable = lib.mkEnableOption "set up an anubis config that" + "specifically gets mad at crawlers that pretend to be known crawlers " + "from an unexpected address range";
   };
   config = lib.mkIf cfg.enable {
