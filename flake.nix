@@ -55,8 +55,8 @@
     #};
     oisd = { url = "github:sjhgvr/oisd"; flake = false; };
 
-    hackson-pkgs.url = "github:hacksonNova/hackson-pkgs.nix";
-    minimal-shell.url = "github:hacksonNova/nix-minimal-shell";
+    hackson-pkgs.url = "github:lunNova/lun-pkgs.nix";
+    minimal-shell.url = "github:lunNova/nix-minimal-shell";
     lanzaboote.url = "github:nix-community/lanzaboote";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     x1e-nixos-config.url = "github:kuruczgy/x1e-nixos-config";
