@@ -18,7 +18,7 @@
     thoth-reminder-bot.url = "github:mmk150/reminder_bot";
     thoth-reminder-bot.inputs.nixpkgs.follows = "nixpkgs";
     thoth-reminder-bot.inputs.flake-utils.follows = "flake-utils";
-   
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     crane.url = "github:ipetkov/crane";
@@ -98,10 +98,10 @@
       localPackagesForPkgs = pkgs: import ./packages { inherit pkgs flakeArgs; };
       nixosModules = self.lib.readExportedModules ./modules/exported;
       nixosConfigurations = {
-        
-        hackson-amayadori-nixos = allSystems.makeHost.x86_64-linux ./hosts/amayadori; 
+
+        hackson-amayadori-nixos = allSystems.makeHost.x86_64-linux ./hosts/amayadori;
         #builder-nixos = allSystems.makeHost.x86_64-linux ./hosts/builder;
-       
+
       };
 
     } // allSystems;

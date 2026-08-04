@@ -14,7 +14,23 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  
+  fileSystems."/" =
+    {
+      device = "tmpfs";
+      fsType = "tmpfs";
+      options = [ "defaults" "size=2G" "mode=755" ];
+      neededForBoot = true;
+    };
+
+  fileSystems."/persist" = {
+    neededForBoot = true;
+  };
+
+
+
+
+  swapDevices = lib.mkForce
+    [{ device = "/dev/disk/by-uuid/ad0f0dce-d700-456d-b563-cbce2ee278a1"; }];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
-

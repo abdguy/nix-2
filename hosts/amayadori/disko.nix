@@ -1,5 +1,3 @@
-{ lib, ... }:
-
 {
   disko.devices = {
     disk.main = {
@@ -24,19 +22,27 @@
 
           swap = {
             size = "8G";
-
             content = {
               type = "swap";
             };
           };
 
           system = {
-            size = "50G";
+            size = "52G"; # Increased to accommodate the 2G root subvolume.
 
             content = {
               type = "btrfs";
 
               subvolumes = {
+                "@" = {
+                  mountpoint = "/";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                  neededForBoot = true;
+                };
+
                 "@nix" = {
                   mountpoint = "/nix";
                   mountOptions = [
@@ -51,6 +57,7 @@
                     "compress=zstd"
                     "noatime"
                   ];
+                  neededForBoot = true;
                 };
               };
             };
