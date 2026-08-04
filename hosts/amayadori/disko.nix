@@ -9,7 +9,7 @@
 
         partitions = {
           ESP = {
-            size = "512M";
+            size = "1G";
             type = "EF00";
 
             content = {
@@ -22,13 +22,11 @@
 
           swap = {
             size = "8G";
-            content = {
-              type = "swap";
-            };
+            content.type = "swap";
           };
 
           system = {
-            size = "52G"; # Increased to accommodate the 2G root subvolume.
+            size = "100%";
 
             content = {
               type = "btrfs";
@@ -36,35 +34,20 @@
               subvolumes = {
                 "@" = {
                   mountpoint = "/";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                  neededForBoot = true;
+                  mountOptions = [ "compress=zstd" "noatime" ];
                 };
 
                 "@nix" = {
                   mountpoint = "/nix";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
+                  mountOptions = [ "compress=zstd" "noatime" ];
                 };
 
                 "@persist" = {
                   mountpoint = "/persist";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                  neededForBoot = true;
+                  mountOptions = [ "compress=zstd" "noatime" ];
                 };
               };
             };
-          };
-
-          rest = {
-            size = "100%";
           };
         };
       };
