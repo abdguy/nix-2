@@ -14,39 +14,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    {
-      device = "tmpfs";
-      fsType = "tmpfs";
-      options = [ "defaults" "size=2G" "mode=755" ];
-      neededForBoot = true;
-    };
-
-  fileSystems."/persist" =
-    {
-      device = "/dev/disk/by-uuid/fe4dde05-0398-4426-af5a-3dd41e35c4c1";
-      fsType = "btrfs";
-      neededForBoot = true;
-      options = [ "defaults" "subvol=@persist" "ssd" "nodiscard" "rw" "noatime" "compress=zstd" "space_cache=v2" ];
-    };
-
-  fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-uuid/fe4dde05-0398-4426-af5a-3dd41e35c4c1";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" ];
-    };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/12CE-A600";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
-
-  swapDevices = lib.mkForce
-    [{ device = "/dev/disk/by-uuid/ad0f0dce-d700-456d-b563-cbce2ee278a1"; }];
-
+  
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
 

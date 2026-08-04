@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib,flakeArgs, ... }:
 
 let
   # https://github.com/cole-mickens/nixcfg/blob/main/mixins/nvidia.nix
@@ -27,7 +27,6 @@ in
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-
     ];
 
   hackson.power-saving.enable = true;

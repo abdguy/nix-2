@@ -10,8 +10,6 @@
     systems.url = "github:nix-systems/default-linux";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     erosanix.url = "github:emmanuelrosa/erosanix";
     erosanix.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,10 +18,7 @@
     thoth-reminder-bot.url = "github:mmk150/reminder_bot";
     thoth-reminder-bot.inputs.nixpkgs.follows = "nixpkgs";
     thoth-reminder-bot.inputs.flake-utils.follows = "flake-utils";
-    deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
-    openxr-nix-flake.url = "github:hacksonNova/openxr-nix-flake";
-    openxr-nix-flake.inputs.nixpkgs.follows = "nixpkgs";
+   
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     crane.url = "github:ipetkov/crane";
@@ -47,11 +42,6 @@
       inputs.crane.follows = "crane";
       inputs.advisory-db.follows = "advisory-db";
     };
-    mobile-nixos = {
-      url = "github:NixOS/mobile-nixos";
-      flake = false;
-    };
-
 
     alicorn-vscode-extension = {
       url = "github:Fundament-Software/alicorn-vscode-extension";
@@ -107,19 +97,11 @@
       overlays.default = import ./overlay.nix { inherit flakeArgs; };
       localPackagesForPkgs = pkgs: import ./packages { inherit pkgs flakeArgs; };
       nixosModules = self.lib.readExportedModules ./modules/exported;
-
       nixosConfigurations = {
-        #router-nixos = allSystems.makeHost.x86_64-linux ./hosts/router;
-        #tsukiakari-nixos = allSystems.makeHost.x86_64-linux ./hosts/tsukiakari;
-        #tsukikage-nixos = allSystems.makeHost.x86_64-linux ./hosts/tsukikage;
-        # hoshitsuki-nixos = allSystems.makeHost.x86_64-linux ./hosts/hoshitsuki;
-        #hackson-kosame-nixos = allSystems.makeHost.x86_64-linux ./hosts/kosame;
-        #hackson-hisame-nixos = allSystems.makeHost.x86_64-linux ./hosts/hisame;
-        #hackson-shigure = allSystems.makeHost.x86_64-linux ./hosts/shigure;
-        #hackson-aoame = allSystems.makeHost.aarch64-linux ./hosts/aoame;
-        hackson-amayadori-nixos = allSystems.makeHost.x86_64-linux ./hosts/amayadori;
+        
+        hackson-amayadori-nixos = allSystems.makeHost.x86_64-linux ./hosts/amayadori; 
         #builder-nixos = allSystems.makeHost.x86_64-linux ./hosts/builder;
-        #kirisame-nixos = allSystems.makeHost.x86_64-linux ./hosts/kirisame;
+       
       };
 
     } // allSystems;
